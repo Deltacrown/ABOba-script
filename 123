@@ -33,20 +33,29 @@ ButtonTab:Button({
         local gui = Instance.new("ScreenGui")
         gui.Name = "ImageDisplay"
         gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        local imageLabel = Instance.new("ImageLabel")
+        imageLabel.Size = UDim2.new(1, 0, 1, 0)
+        imageLabel.Position = UDim2.new(0, 0, 0, 0)
+        
         imageLabel.BackgroundTransparency = 1
         imageLabel.ScaleType = Enum.ScaleType.Crop
         imageLabel.Parent = gui
         local sound = Instance.new("Sound")
-        
+        sound.SoundId = "rbxassetid://4899159505"
         sound.Volume = 10
         sound.Looped = false
-        sound.Parent = game.Workspace
         
+        
+        local messages = {  
+        }
         local target = "All"
-        local SayMessageRequest = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+        
         for _, message in ipairs(messages) do
             SayMessageRequest:FireServer(message, target)
         end
+        wait(3)
+        
+    end
 })
 
 local Dropdown = ButtonTab:Dropdown({
@@ -554,4 +563,4 @@ CreateThemeTab:Button({
     Callback = function()
         updateTheme()
     end
-})
+}) 
